@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatingAppApi", "DatingAppApi\DatingAppApi.csproj", "{684CA4D7-8229-4227-8D20-07C686EE292F}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "DatingAppSpa(1)", "DatingAppSpa\", "{87FE8F20-05FC-4FDB-A3CE-99A34F8DA491}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_62381"
+		Debug.AspNetCompiler.PhysicalPath = "DatingAppSpa\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_62381\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_62381"
+		Release.AspNetCompiler.PhysicalPath = "DatingAppSpa\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_62381\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "62381"
+		SlnRelativePath = "DatingAppSpa\"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{684CA4D7-8229-4227-8D20-07C686EE292F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{684CA4D7-8229-4227-8D20-07C686EE292F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{684CA4D7-8229-4227-8D20-07C686EE292F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{684CA4D7-8229-4227-8D20-07C686EE292F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87FE8F20-05FC-4FDB-A3CE-99A34F8DA491}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87FE8F20-05FC-4FDB-A3CE-99A34F8DA491}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87FE8F20-05FC-4FDB-A3CE-99A34F8DA491}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{87FE8F20-05FC-4FDB-A3CE-99A34F8DA491}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C8F3C9B5-869C-4C0B-9AD1-3F503885D14C}
+	EndGlobalSection
+EndGlobal
