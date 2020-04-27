@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Net;
 using System.Text;
 
@@ -36,8 +37,9 @@ namespace DatingApp
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
-                    .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:Token").Value)
+                        ),
                     ValidateIssuer = false,
                     ValidateAudience = false
                 });
@@ -60,7 +62,7 @@ namespace DatingApp
                         var error = context.Features.Get<IExceptionHandlerFeature>();
                         if (error != null)
                         {
-                            context.Response.AddApllicationError(error.Error.Message);
+                            context.Response.AddApplicationError(error.Error.Message);
                             await context.Response.WriteAsync(error.Error.Message);
                         }
                     });
