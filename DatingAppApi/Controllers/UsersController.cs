@@ -7,16 +7,16 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DatingAppApi.Controllers
-{
-    [Authorize]
+{  
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UsersController : ControllerBase
     {
         private readonly IDatingRepository _repo;
         private readonly IMapper _mapper;
 
-        public UsersController(IDatingRepository repo,IMapper mapper)
+        public UsersController(IDatingRepository repo, IMapper mapper)
         {
             _repo = repo;
             _mapper = mapper;

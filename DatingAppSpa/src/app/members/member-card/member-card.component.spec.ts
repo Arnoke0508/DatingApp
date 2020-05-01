@@ -1,21 +1,21 @@
-﻿/// <reference path="../../../node_modules/@types/jasmine/index.d.ts" />
+
 import { TestBed, async, ComponentFixture, ComponentFixtureAutoDetect } from '@angular/core/testing';
 import { BrowserModule, By } from "@angular/platform-browser";
-import { MemberListComponent } from './member-list.component';
+import { MemberCardComponent } from './member-card.component';
 
-let component: MemberListComponent;
-let fixture: ComponentFixture<MemberListComponent>;
+let component: MemberCardComponent;
+let fixture: ComponentFixture<MemberCardComponent>;
 
-describe('member-list component', () => {
+describe('member-card component', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ MemberListComponent ],
+            declarations: [ MemberCardComponent ],
             imports: [ BrowserModule ],
             providers: [
                 { provide: ComponentFixtureAutoDetect, useValue: true }
             ]
         });
-        fixture = TestBed.createComponent(MemberListComponent);
+        fixture = TestBed.createComponent(MemberCardComponent);
         component = fixture.componentInstance;
     }));
 
