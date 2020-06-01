@@ -7,7 +7,7 @@ namespace DatingAppApi.Data
 {
     public class Seed
     {
-        public static void SeedUsers(ApplicationDbContext Context)
+        public static void SeedUsers(DataContext Context)
         {
             if (!Context.Users.Any())
             {

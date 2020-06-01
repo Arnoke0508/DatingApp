@@ -11,9 +11,9 @@ namespace DatingAppAPI.Controllers
     [Authorize]
     public class ValuesController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly DataContext _context;
 
-        public ValuesController(ApplicationDbContext Context)
+        public ValuesController(DataContext Context)
         {
             _context = Context;
         }

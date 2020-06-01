@@ -9,14 +9,29 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DatingAppApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200427210010_ExtendedUserClass")]
-    partial class ExtendedUserClass
+    [Migration("20200601190307_AddedLikeEntity")]
+    partial class AddedLikeEntity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.3");
+
+            modelBuilder.Entity("DatingAppApi.Models.Like", b =>
+                {
+                    b.Property<int>("LikerId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("LikeeId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("LikerId", "LikeeId");
+
+                    b.HasIndex("LikeeId");
+
+                    b.ToTable("Likes");
+                });
 
             modelBuilder.Entity("DatingAppApi.Models.Photo", b =>
                 {
@@ -32,6 +47,9 @@ namespace DatingAppApi.Migrations
 
                     b.Property<bool>("IsMain")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("PublicId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Url")
                         .HasColumnType("TEXT");
@@ -108,6 +126,21 @@ namespace DatingAppApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Values");
+                });
+
+            modelBuilder.Entity("DatingAppApi.Models.Like", b =>
+                {
+                    b.HasOne("DatingAppApi.Models.User", "Likee")
+                        .WithMany("Likers")
+                        .HasForeignKey("LikeeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("DatingAppApi.Models.User", "Liker")
+                        .WithMany("Likees")
+                        .HasForeignKey("LikerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DatingAppApi.Models.Photo", b =>
