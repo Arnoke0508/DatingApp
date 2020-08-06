@@ -1,4 +1,5 @@
-﻿using DatingAppApi.Helpers;
+﻿using CloudinaryDotNet.Actions;
+using DatingAppApi.Helpers;
 using DatingAppApi.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -53,7 +54,7 @@ namespace DatingAppApi.Data
 
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
-            var users = _context.Users.Include(p => p.Photos).OrderByDescending(u=>u.LastActive).AsQueryable();
+            var users = _context.Users.Include(p => p.Photos).OrderByDescending(u => u.LastActive).AsQueryable();
 
             users = users.Where(u => u.Id != userParams.UserId);
 
@@ -95,7 +96,7 @@ namespace DatingAppApi.Data
             return await PagedList<User>.CreateAsync(users, userParams.PageNumber, userParams.PageSize);
         }
 
-        private async Task<IEnumerable<int>> GetUserLikes(int id,bool likers)
+        private async Task<IEnumerable<int>> GetUserLikes(int id, bool likers)
         {
             var user = await _context.Users
                 .Include(x => x.Likers)
@@ -115,6 +116,51 @@ namespace DatingAppApi.Data
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<Message> GetMessage(int Id)
+        {
+            return await _context.Messages.FirstOrDefaultAsync(m => m.Id == Id);
+        }
+
+        public async Task<PagedList<Message>> GetMessagesForUser(MessageParams messageParams)
+        {
+            var messages = _context.Messages
+                .Include(u => u.Sender).ThenInclude(p => p.Photos)
+                .Include(u => u.Recipient).ThenInclude(p => p.Photos)
+                .AsQueryable();
+
+            switch (messageParams.MessageContainer)
+            {
+                case "Inbox":
+                    messages = messages.Where(u => u.RecipientId == messageParams.UserId &&
+                    !u.RecipientDeleted);
+                    break;
+                case "Outbox":
+                    messages = messages.Where(u => u.SenderId == messageParams.UserId &&
+                    !u.SenderDeleted);
+                    break;
+                default:
+                    messages = messages.Where(u => u.RecipientId == messageParams.UserId &&
+                    !u.RecipientDeleted && !u.IsRead);
+                    break;
+            }
+            messages = messages.OrderByDescending(d => d.MessageSent);
+            return await PagedList<Message>.CreateAsync(messages,
+                messageParams.PageNumber, messageParams.PageSize);
+        }
+
+        public async Task<IEnumerable<Message>> GetMessageThread(int userId, int recipientId)
+        {
+            var messages = await _context.Messages
+                .Include(u => u.Sender).ThenInclude(p => p.Photos)
+                .Include(u => u.Recipient).ThenInclude(p => p.Photos)
+                .Where(m => m.RecipientId == userId && !m.RecipientDeleted && m.SenderId == recipientId ||
+                m.RecipientId == recipientId && !m.SenderDeleted && m.SenderId == userId)
+                .OrderByDescending(m => m.MessageSent)
+                .ToListAsync();
+
+            return messages;
         }
     }
 }
